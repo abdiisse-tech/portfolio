@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abdi Ibrahim Isse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a ledger. Left-aligned hero, a row of audited-figure totals, then dated entries in ruled rows. */
+:root{
+  --bg:#F2F5F6; --surface:#FFFFFF; --ink:#13222B; --muted:#51636E; --rule:#CBD6DB;
+  --accent:#0B6B62; --accent-ink:#FFFFFF; --tint:#E3EFEE;
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E181E; --surface:#15232B; --ink:#E6EEF1; --muted:#9BB0BB; --rule:#2A3E49;
+  --accent:#4FC8B6; --accent-ink:#06201C; --tint:#16332F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E181E; --surface:#15232B; --ink:#E6EEF1; --muted:#9BB0BB; --rule:#2A3E49;
+  --accent:#4FC8B6; --accent-ink:#06201C; --tint:#16332F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:32px 64px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mono{font-family:var(--f-mono)}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+header.top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+header.top nav{display:flex;gap:18px;flex-wrap:wrap}
+header.top nav a{color:var(--ink);text-decoration:none;font-size:14px;font-weight:500}
+header.top nav a:hover{color:var(--accent);text-decoration:underline}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;padding-block:56px 40px;align-items:end}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,7vw,4.9rem);line-height:.98;letter-spacing:-.03em;margin:12px 0 20px;text-wrap:balance}
+.hero p.role{font-size:1.2rem;color:var(--ink);max-width:34ch;margin:0 0 14px;font-weight:500}
+.hero p.sub{color:var(--muted);max-width:56ch;margin:0}
+.contact{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:20px;display:grid;gap:14px}
+.contact div{min-width:0}
+.portrait{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:3px;display:block;background:var(--tint)}
+@media (min-width:761px){.hero{align-items:start}}
+.contact .v{font-family:var(--f-mono);font-size:14px;overflow-wrap:anywhere;user-select:all}
+.contact button{font:inherit;font-weight:600;font-size:14px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:3px;padding:10px 14px;cursor:pointer;justify-self:start}
+.contact button:hover{filter:brightness(1.08)}
+
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-block:8px 0}
+.totals div{padding:18px 16px 18px 0;border-right:1px solid var(--rule)}
+.totals div:last-child{border-right:0}
+.totals .n{font-family:var(--f-mono);font-weight:500;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--accent)}
+.totals .t{font-size:14px;color:var(--muted);margin-top:8px}
+
+section{padding-top:64px}
+h2{font-family:var(--f-display);font-size:clamp(1.6rem,3.5vw,2.2rem);letter-spacing:-.02em;line-height:1.1;margin:6px 0 24px;text-wrap:balance}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+.about p{margin:0 0 14px;max-width:62ch}
+.langs{display:grid;gap:0;align-content:start}
+.langs div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.langs div:first-child{border-top:1px solid var(--rule)}
+.langs span:last-child{font-family:var(--f-mono);font-size:14px;color:var(--muted)}
+
+.entry{display:grid;grid-template-columns:170px minmax(0,1fr);gap:32px;padding-block:28px;border-top:1px solid var(--rule)}
+.entry:last-child{border-bottom:1px solid var(--rule)}
+.entry .when{font-family:var(--f-mono);font-size:13px;color:var(--muted);line-height:1.5}
+.entry h3{font-family:var(--f-display);font-size:1.3rem;margin:0 0 2px;line-height:1.25}
+.entry .org{color:var(--accent);font-weight:600;margin-bottom:12px}
+.entry ul{margin:0;padding-left:18px;display:grid;gap:8px;max-width:70ch}
+.entry li::marker{color:var(--accent)}
+
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.proj{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.proj h3{font-family:var(--f-display);font-size:1.15rem;margin:0;line-height:1.25}
+.proj p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.repo{font-family:var(--f-mono);font-size:13px;font-weight:500;text-decoration:none}
+.repo:hover{text-decoration:underline}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--f-mono);font-size:12px;background:var(--tint);color:var(--accent);padding:3px 8px;border-radius:2px}
+.proj.ai{border-color:var(--accent)}
+.score{font-family:var(--f-mono);font-size:13px;color:var(--accent);font-weight:500}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:28px}
+.skills h3{font-size:12px;font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:500;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.skills ul{list-style:none;margin:0;padding:0}
+.skills li{padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px}
+
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 40px}
+.edu div{padding:14px 0;border-bottom:1px solid var(--rule);min-width:0}
+.edu .main{grid-column:1/-1;font-family:var(--f-display);font-size:1.25rem;border-top:1px solid var(--ink)}
+.edu small{display:block;color:var(--muted);font-size:14px}
+
+footer{margin-top:72px;padding-top:20px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+
+@media (max-width:760px){
+  .hero,.about{grid-template-columns:minmax(0,1fr);gap:28px}
+  .entry{grid-template-columns:minmax(0,1fr);gap:8px}
+  .totals div{border-right:0;border-bottom:1px solid var(--rule)}
+  .hero{padding-block:36px 28px}
+}
+@media (prefers-reduced-motion:no-preference){.contact button{transition:filter .15s}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="label">Abdi Ibrahim Isse · Finance Portfolio</span>
+    <nav aria-label="Sections">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="https://github.com/abdiisse-tech">GitHub</a><a href="https://www.linkedin.com/in/abdi-ibrahim-isse-0893572bb">LinkedIn</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="label">Mogadishu, Somalia</span>
+      <h1>Abdi Ibrahim Isse</h1>
+      <p class="role">Finance Assistant: budget tracking, payments and compliance.</p>
+      <p class="sub">Five years of keeping financial records exact, supporting documents complete and audits uneventful. I also build SQL, Power BI and Python tools that make the numbers faster to check.</p>
+    </div>
+    <aside class="contact" aria-label="Contact">
+      <div><div class="label">Email</div><div class="v" id="email">abdirakiibisse@gmail.com</div></div>
+      <div><div class="label">Phone</div><div class="v">+252 615 619 886</div></div>
+      <div><div class="label">GitHub</div><div class="v"><a href="https://github.com/abdiisse-tech">github.com/abdiisse-tech</a></div></div>
+      <div><div class="label">LinkedIn</div><div class="v"><a href="https://www.linkedin.com/in/abdi-ibrahim-isse-0893572bb">abdi-ibrahim-isse-0893572bb</a></div></div>
+      <button type="button" id="copy">Copy email</button>
+    </aside>
+  </div>
+
+  <div class="totals" aria-label="Career record">
+    <div><div class="n">5+</div><div class="t">years in financial administration</div></div>
+    <div><div class="n">100%</div><div class="t">compliance record over 3.5 years</div></div>
+    <div><div class="n">0%</div><div class="t">payment discrepancies at Amal Bank</div></div>
+    <div><div class="n">0</div><div class="t">adverse audit findings at SNA</div></div>
+    <div><div class="n">~30%</div><div class="t">faster document retrieval</div></div>
+  </div>
+
+  <section id="about">
+    <span class="label">About</span>
+    <h2>Accurate records, on time, in line with policy.</h2>
+    <div class="about">
+      <div>
+        <p>I hold a B.Sc. in Accounting &amp; Finance and have worked in payment processing, budget line monitoring, account reconciliation and audit-ready filing across a bank, a national institution and a media company.</p>
+        <p>I work in Excel, SQL, Python and Power BI, and I am Google-certified in Data Analytics and Project Management and IBM-certified in Generative AI Engineering.</p>
+        <p>I want to support the Norwegian Refugee Council's mission of helping people forced to flee through accurate, timely and compliant financial operations.</p>
+      </div>
+      <div class="langs" aria-label="Languages">
+        <div><span>Somali</span><span>Native</span></div>
+        <div><span>English</span><span>C1 · Professional</span></div>
+        <div><span>Arabic</span><span>Conversational</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <span class="label">Experience</span>
+    <h2>Three roles, one standard: every entry checked and filed.</h2>
+
+    <article class="entry">
+      <div class="when">Jul 2022 – Jan 2026<br>3 yrs 7 mos</div>
+      <div>
+        <h3>Compliance &amp; Content Operations Specialist</h3>
+        <div class="org">Bile Media · Mogadishu</div>
+        <ul>
+          <li>Monitored operations against compliance frameworks and flagged discrepancies, with a 100% compliance record across the 3.5-year tenure.</li>
+          <li>Designed a central online and physical filing system that cut document retrieval time by about 30% and gave accurate real-time status reporting.</li>
+          <li>Kept financial contact lists and operational trackers current across teams and followed up on outstanding issues.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">May 2019 – Dec 2020<br>1 yr 8 mos</div>
+      <div>
+        <h3>Finance &amp; Administrative Officer (Clerk)</h3>
+        <div class="org">Somali National Army · Mogadishu</div>
+        <ul>
+          <li>Maintained financial trackers and disbursement registers for large operations, monitoring costs against budget lines with 100% accuracy.</li>
+          <li>Checked that costs were posted to the correct project and budget line, and verified supporting documents before paying suppliers and service providers.</li>
+          <li>Prepared status reports on trackers, travel costs, consultant contracts and outstanding balances for management decisions.</li>
+          <li>Enforced financial policies and SOPs and kept complete, current records, resulting in zero adverse audit findings.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">Apr 2018 – Feb 2019<br>11 mos</div>
+      <div>
+        <h3>Finance &amp; Cash Operations Officer</h3>
+        <div class="org">Amal Bank Somalia · Mogadishu</div>
+        <ul>
+          <li>Processed daily payments to suppliers, service providers and staff, tracking every transaction with a 0% discrepancy record.</li>
+          <li>Reconciled accounts regularly and kept records in line with organizational financial standards.</li>
+          <li>Kept records in digital and physical form, with all documents stamped, authorized and filed for audit retrieval.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects">
+    <span class="label">Projects</span>
+    <h2>Data and AI work that supports finance.</h2>
+    <div class="projects">
+      <article class="proj">
+        <h3>Workforce &amp; Attrition KPI Dashboard</h3>
+        <p>Interactive HR dashboard covering workforce demographics, headcount distribution and salary scales, built with SQL queries and Power BI DAX measures.</p>
+        <div class="tags"><span>SQL</span><span>Power BI</span><span>Excel</span></div>
+      </article>
+      <article class="proj">
+        <h3>Financial &amp; Commercial Performance Analytics</h3>
+        <p>Cleaned large sales and transaction datasets to model revenue trends, profit margins and cost structures across operational zones.</p>
+        <div class="tags"><span>SQL</span><span>Power BI</span></div>
+      </article>
+      <article class="proj">
+        <h3>Risk &amp; Customer Churn Segmentation</h3>
+        <p>Segmented customer risk profiles and credit behavior with relational queries, producing insights for retention strategy.</p>
+        <div class="tags"><span>SQL</span><span>Python</span><span>Power BI</span></div>
+      </article>
+      <article class="proj">
+        <h3>Bank AI Assistant</h3>
+        <p>A local AI assistant that answers common banking questions on account opening, money transfers and password resets.</p>
+        <div class="tags"><span>Python</span><span>Ollama</span><span>Qwen3</span><span>Git/GitHub</span></div>
+      <a class="repo" href="https://github.com/abdiisse-tech/Bank-AI-Assistant">View on GitHub →</a>
+      </article>
+      <article class="proj ai">
+        <h3>Document AI Assistant</h3>
+        <p>An end-to-end RAG pipeline: PDF extraction, chunking, embeddings, vector retrieval and grounded Qwen3 answers.</p>
+        <div class="score">Evaluation 5/5 (100%)</div>
+        <div class="tags"><span>Python</span><span>RAG</span><span>FAISS</span><span>Sentence Transformers</span><span>PyMuPDF</span><span>Ollama</span></div>
+      <a class="repo" href="https://github.com/abdiisse-tech/Document-AI-Assistant">View on GitHub →</a>
+      </article>
+      <article class="proj">
+        <h3>Sales Analysis: SQL Server &amp; Power BI</h3>
+        <p>End-to-end sales analysis: data checks and business queries in SQL Server using CTEs and window functions, plus an interactive Power BI dashboard with KPIs, trends and rankings by region, rep and category.</p>
+        <div class="tags"><span>SQL Server</span><span>Power BI</span></div>
+        <a class="repo" href="https://github.com/abdiisse-tech/sales-sql-powerbi-project">View on GitHub →</a>
+      </article>
+      <article class="proj">
+        <h3>Superstore Retail Sales Analysis</h3>
+        <p>Retail sales analysis using Excel, SQL Server and Power BI.</p>
+        <div class="tags"><span>Excel</span><span>SQL Server</span><span>Power BI</span></div>
+        <a class="repo" href="https://github.com/abdiisse-tech/superstore-sales-analysis">View on GitHub →</a>
+      </article>
+      <article class="proj">
+        <h3>AI Data Analyst Assistant</h3>
+        <p>A Python tool for automated data analysis tasks.</p>
+        <div class="tags"><span>Python</span><span>AI</span></div>
+        <a class="repo" href="https://github.com/abdiisse-tech/AI-Data-Analyst-Assistant">View on GitHub →</a>
+      </article>
+      <article class="proj">
+        <h3>AI Chatbot Assistant</h3>
+        <p>A professional AI chatbot built with Python and Streamlit.</p>
+        <div class="tags"><span>Python</span><span>Streamlit</span></div>
+        <a class="repo" href="https://github.com/abdiisse-tech/AI-Chatbot-Assistant">View on GitHub →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <span class="label">Skills</span>
+    <h2>What I use day to day.</h2>
+    <div class="skills">
+      <div><h3>Finance &amp; Accounting</h3><ul><li>Financial tracker management</li><li>Budget line monitoring</li><li>Payment processing</li><li>Bank reconciliation</li><li>Discrepancy flagging</li></ul></div>
+      <div><h3>Data &amp; Analytics</h3><ul><li>SQL database querying</li><li>Power BI dashboards</li><li>Python (Pandas)</li><li>Advanced Excel modeling</li><li>Automated reporting</li></ul></div>
+      <div><h3>Compliance &amp; Records</h3><ul><li>Financial documentation</li><li>Audit support</li><li>Month-end reporting</li><li>Statutory compliance</li><li>Document management</li></ul></div>
+      <div><h3>Emerging Tech</h3><ul><li>AI-powered reporting</li><li>Process automation</li><li>Financial systems support</li></ul></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <span class="label">Education &amp; certifications</span>
+    <h2>Degree and professional certificates.</h2>
+    <div class="edu">
+      <div class="main">B.Sc. in Accounting &amp; Finance<small>University of Somalia (UNISO), Mogadishu · Graduated 2017</small></div>
+      <div>Google Project Management Professional Certificate<small>Coursera / Google</small></div>
+      <div>Google Data Analytics Professional Certificate<small>Coursera / Google</small></div>
+      <div>Google IT Support Professional Certificate<small>Coursera / Google</small></div>
+      <div>IBM Generative AI Engineering Professional Certificate<small>Coursera / IBM</small></div>
+      <div>Accounting Assistant Professional Certificate<small>Coursera</small></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Abdi Ibrahim Isse · Mogadishu, Somalia</span>
+    <span>References available upon request</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('copy'),e=document.getElementById('email');
+  b.addEventListener('click',function(){
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy email'},1800)};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents(e);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press copy'};
+    try{navigator.clipboard.writeText(e.textContent.trim()).then(done,fallback)}catch(x){fallback()}
+  });
+})();
+</script>
+
+</body>
+</html>
